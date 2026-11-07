@@ -1,58 +1,143 @@
-Banco Digital - Controle de Contas Bancarias
-Aplicacao desenvolvida em C++ para cadastrar clientes e administrar contas bancarias por meio de operacoes realizadas no terminal. O projeto corresponde a Etapa 2 da atividade de INF101 - Programacao de Computadores I.
-Proposta do projeto
-O sistema organiza diferentes contas em estruturas de arrays e registra as operacoes financeiras realizadas durante a execucao. A aplicacao foi planejada para atender as seguintes necessidades:
-1. Abrir e cadastrar contas para clientes.
-2. Consultar uma conta individualmente ou visualizar a relacao completa.
-3. Creditar valores por meio de depositos.
-4. Efetuar retiradas, impedindo saques acima do saldo disponivel.
-5. Transferir dinheiro entre contas cadastradas.
-6. Consultar o extrato e os totais de entradas e saidas de cada conta.
-Recursos disponiveis
-Cadastro e consulta
-Cada novo cadastro recebe um numero sequencial, iniciado em 1001. Para cada conta, sao guardados o nome do titular, CPF, modalidade, saldo e situacao. O sistema oferece uma tela de consulta individual e outra para listar todos os cadastros.
-Operacoes financeiras
-As operacoes verificam se a conta informada foi cadastrada e esta ativa. Depositos e transferencias recebidas aumentam o saldo; saques e transferencias enviadas diminuem o saldo. Valores iguais ou inferiores a zero nao sao aceitos, e uma retirada somente e concluida quando existe saldo suficiente.
-Registro de movimentacoes
-Cada operacao e adicionada ao historico em memoria:
-- D: deposito ou valor recebido;
-- S: saque ou valor enviado.
-Uma transferencia e representada por dois lancamentos: um de saida na conta de origem e outro de entrada na conta de destino. O extrato filtra os registros pelo numero da conta consultada.
-Limites e armazenamento
-O programa utiliza arrays paralelos para guardar os dados, respeitando os limites definidos na atividade:
-- 100 contas bancarias;
-- 500 lancamentos no historico.
-As informacoes existem somente enquanto o programa esta aberto. Ao encerrar a execucao, os dados sao apagados. O armazenamento permanente nao faz parte desta etapa.
-Tecnologias e conceitos
-- Linguagem C++;
-- Arrays paralelos;
-- Funcoes;
-- Estruturas condicionais (if, else e switch);
-- Estruturas de repeticao (for e do while);
-- Entrada e saida de dados pelo terminal.
-Arquivos
-- BancoDigital.cpp: implementacao do sistema;
-- README.md: descricao do projeto e orientacoes de uso.
-Como obter o projeto
-Clone o repositorio substituindo o endereco abaixo pelo link publicado no GitHub da pessoa responsavel:
-git clone https://github.com/USUARIO/REPOSITORIO.git
-Depois, entre na pasta criada pelo Git:
-cd REPOSITORIO
-Compilacao e execucao
-E necessario ter um compilador C++ instalado, como o G++.
+# Banco Digital – Sistema de Gestão de Contas Bancárias
 
-No Windows, compile com:
+Projeto desenvolvido em C++ para implementar um sistema de cadastro e movimentação de contas bancárias, permitindo registrar clientes, consultar contas e acompanhar operações financeiras realizadas durante a execução do programa.
+
+## Objetivo
+
+O projeto foi desenvolvido para realizar três atividades principais:
+
+1. Cadastrar e organizar diferentes contas bancárias.
+2. Realizar operações de depósito, saque e transferência entre contas.
+3. Registrar as movimentações e consultar o extrato de cada conta.
+
+## Funcionalidades
+
+### 1. Cadastrar contas bancárias
+
+O programa permite abrir novas contas e armazenar informações dos clientes, como:
+
+- Número da conta, gerado automaticamente a partir de `1001`;
+- Nome do titular;
+- CPF;
+- Modalidade da conta (Corrente ou Poupança);
+- Saldo inicial;
+- Situação da conta.
+
+O sistema permite cadastrar até 100 contas.
+
+### 2. Listar e pesquisar contas
+
+O programa permite visualizar todas as contas cadastradas ou pesquisar uma conta pelo número.
+
+Na consulta são apresentadas informações como:
+
+- Número da conta;
+- Nome do titular;
+- CPF;
+- Modalidade da conta;
+- Saldo disponível;
+- Situação da conta.
+
+### 3. Realizar depósitos e saques
+
+O sistema permite adicionar ou retirar valores das contas cadastradas.
+
+Para realizar essas operações, são verificadas as seguintes condições:
+
+- A conta informada precisa existir e estar ativa;
+- O valor da operação deve ser maior que zero;
+- Para saques, é necessário possuir saldo suficiente;
+- Deve existir espaço disponível no histórico de movimentações.
+
+Os depósitos são registrados com o código `D`, enquanto os saques utilizam o código `S`.
+
+### 4. Realizar transferências
+
+O programa permite transferir valores entre duas contas diferentes.
+
+Antes de concluir a operação, o sistema verifica:
+
+- Se as duas contas foram encontradas;
+- Se ambas estão ativas;
+- Se a conta de origem é diferente da conta de destino;
+- Se o valor informado é positivo;
+- Se existe saldo suficiente na conta de origem;
+- Se há espaço para registrar as duas movimentações.
+
+Cada transferência gera dois registros no histórico:
+
+- `S`: saída do valor na conta de origem;
+- `D`: entrada do valor na conta de destino.
+
+### 5. Consultar extrato
+
+O sistema permite consultar as movimentações de uma conta específica, apresentando:
+
+- Créditos e depósitos recebidos;
+- Débitos e saques realizados;
+- Total de créditos;
+- Total de débitos;
+- Saldo disponível.
+
+O extrato percorre o histórico e apresenta somente os lançamentos pertencentes à conta consultada.
+
+### 6. Histórico de movimentações
+
+As movimentações são armazenadas em arrays paralelos, com capacidade para até 500 lançamentos.
+
+Cada registro guarda o número da conta, o tipo da movimentação e o valor correspondente. Os dados ficam disponíveis apenas enquanto o programa estiver em execução. Ao encerrar o sistema, as informações são perdidas, conforme definido para a Etapa 2.
+
+## Tecnologias utilizadas
+
+- C++
+- Arrays (vetores paralelos)
+- Funções
+- Estruturas condicionais (`if`, `else` e `switch`)
+- Estruturas de repetição (`for` e `do while`)
+- Manipulação de dados em memória
+
+## Instalação
+
+Primeiro, clone o repositório:
+
+```bash
+git clone https://github.com/USUARIO/REPOSITORIO.git
+```
+
+Entre na pasta do projeto:
+
+```bash
+cd REPOSITORIO
+```
+
+## Compilação e execução
+
+Com o compilador G++ instalado, compile o programa:
+
+### Windows
+
+```bash
 g++ -std=c++17 -Wall -Wextra -pedantic BancoDigital.cpp -o BancoDigital.exe
-E execute:
+```
+
+Execute o programa:
+
+```bash
 BancoDigital.exe
-No Linux, compile com:
+```
+
+### Linux
+
+```bash
 g++ -std=c++17 -Wall -Wextra -pedantic BancoDigital.cpp -o BancoDigital
-E execute:
 ./BancoDigital
-Exemplo de utilizacao
-1. Selecione 1 para abrir duas contas.
-2. Use a opcao 4 para depositar um valor na primeira conta.
-3. Escolha 6 para transferir parte do saldo para a segunda conta.
-4. Consulte a opcao 7 nas duas contas para conferir os lancamentos de saida e entrada.
-Consideracoes finais
-O Banco Digital foi organizado para demonstrar o uso de arrays, funcoes, decisoes e repeticoes na construcao de um sistema de contas bancarias. O historico permite acompanhar as operacoes feitas durante a sessao, mantendo o comportamento de armazenamento em memoria solicitado para a Etapa 2.
+```
+
+## Estrutura do projeto
+
+- `BancoDigital.cpp` – código-fonte do sistema bancário;
+- `README.md` – documentação do projeto e instruções de instalação e execução.
+
+## Considerações finais
+
+O projeto foi desenvolvido como parte da Etapa 2 do trabalho da disciplina INF101 – Programação de Computadores I. A implementação utiliza arrays para armazenar contas e movimentações em memória, permitindo praticar conceitos de programação na construção de um sistema de gestão bancária.
